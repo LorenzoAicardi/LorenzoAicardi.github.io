@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorenzo Aicardi — Graphics &amp; Real-Time Systems Engineer</title>
+<meta name="description" content="Portfolio of Lorenzo Aicardi — graphics and real-time systems engineer working across rendering, VR/AR, and embedded systems.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #FBFBF9;
+    --bg-alt: #F2F2EF;
+    --ink: #14181C;
+    --ink-soft: #52606B;
+    --accent: #2F6FED;
+    --line: #DEE2E4;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --max: 760px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .wrap-wide{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.site{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(251,251,249,0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav .name{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .nav ul{
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+  }
+  .nav a{
+    text-decoration: none;
+    font-size: 15px;
+    color: var(--ink-soft);
+    transition: color .15s ease;
+  }
+  .nav a:hover{ color: var(--ink); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    padding: 84px 0 72px;
+    overflow: hidden;
+  }
+  .hero-grid{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 50px);
+    line-height: 1.12;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero p.lede{
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 28px;
+  }
+  .hero-links{
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .btn.primary{
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .btn.primary:hover{ background: var(--accent); border-color: var(--accent); }
+  .btn.ghost:hover{ border-color: var(--ink); }
+
+  #hero-canvas{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 360px;
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section{ padding: 64px 0; }
+  section + section{ border-top: 1px solid var(--line); }
+
+  .section-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 36px;
+    gap: 20px;
+  }
+  .section-head h2{
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .section-head .count{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- About ---------- */
+  .about p{ margin: 0 0 16px; color: var(--ink-soft); }
+  .about p:last-child{ margin-bottom: 0; }
+  .about strong{ color: var(--ink); font-weight: 500; }
+
+  .facts{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 32px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .facts dt{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .facts dd{ margin: 0; font-size: 15px; }
+
+  /* ---------- Projects ---------- */
+  .project{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    align-items: start;
+  }
+  .project + .project{ border-top: 1px solid var(--line); }
+
+  .project-visual{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-alt);
+  }
+  .project-visual svg{ width: 62%; height: 62%; stroke: var(--ink); }
+
+  .project-body h3{
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  .project-role{
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  .project-body p.desc{
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 62ch;
+  }
+  .tags{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0 0 16px;
+  }
+  .tags li{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--ink-soft);
+  }
+  .project-links{ display: flex; gap: 18px; }
+  .project-links a{
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+  }
+  .project-links a:hover{ border-bottom-color: var(--accent); }
+
+  /* ---------- Skills ---------- */
+  .skill-groups{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .skill-group h4{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+  }
+  .skill-group ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .skill-group li{
+    padding: 7px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .skill-group li:first-child{ border-top: none; }
+
+  /* ---------- Contact ---------- */
+  .contact h2{
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+  .contact p{
+    color: var(--ink-soft);
+    max-width: 50ch;
+    margin: 0 0 28px;
+  }
+  .contact-links{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .contact-links a{
+    font-family: var(--font-display);
+    font-size: 20px;
+    text-decoration: none;
+    width: fit-content;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .contact-links a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  footer{
+    padding: 28px 0 48px;
+    text-align: left;
+  }
+  footer p{
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  @media (max-width: 720px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    #hero-canvas{ order: -1; max-height: 240px; }
+    .project{ grid-template-columns: 1fr; }
+    .project-visual{ max-width: 160px; }
+    .facts{ grid-template-columns: 1fr; }
+    .skill-groups{ grid-template-columns: 1fr; }
+    .nav ul{ gap: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="name" href="#top">Lorenzo Aicardi</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h1>I build software that renders, tracks, and reacts in real time.</h1>
+        <p class="lede">Graphics and real-time systems engineer working across rendering pipelines, VR/AR, and embedded C++. Based in Milan.</p>
+        <div class="hero-links">
+          <a class="btn primary" href="#work">See my work</a>
+          <a class="btn ghost" href="https://github.com/LorenzoAicardi" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>About</h2>
+      </div>
+      <div class="about">
+        <p>I'm a graphics and real-time systems engineer with a background spanning embedded rendering, VR simulation, and game development. I studied <strong>Computer Science and Engineering at Politecnico di Milano</strong>, where my thesis was an immersive VR training simulator built for medical education.</p>
+        <p>Day to day I work in <strong>C++ and OpenGL</strong> writing embedded graphics software, and outside of work I build renderers and real-time tools — most recently a physically based rendering pipeline in Vulkan, and browser-based demos in Three.js.</p>
+        <p>I'm drawn to the layer where geometry, light, and hardware constraints meet — whether that's a shader running on a headset, a rendering pipeline running on custom hardware, or a robot reading its environment through ROS.</p>
+      </div>
+
+      <dl class="facts">
+        <div>
+          <dt>Education</dt>
+          <dd>MSc Computer Science and Engineering, Politecnico di Milano — 107/110</dd>
+        </div>
+        <div>
+          <dt>Currently</dt>
+          <dd>Graphics software engineer, embedded systems</dd>
+        </div>
+        <div>
+          <dt>Core stack</dt>
+          <dd>C++, OpenGL, Vulkan, HLSL/GLSL</dd>
+        </div>
+        <div>
+          <dt>Also work with</dt>
+          <dd>Unity, C#, Three.js, ROS</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap-wide">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <span class="count">04</span>
+      </div>
+
+      <div class="project">
+        <div class="project-visual">
+          <!-- wireframe cube: rendering -->
+          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
+            <path d="M20 30 L50 15 L80 30 L80 65 L50 80 L20 65 Z"/>
+            <path d="M20 30 L50 45 L80 30"/>
+            <path d="M50 45 L50 80"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <h3>Real-time PBR renderer</h3>
+          <p class="project-role">Personal project · Vulkan</p>
+          <p class="desc">A physically based rendering pipeline built from scratch in Vulkan, covering deferred shading, image-based lighting, and material workflows. Built to go deeper into the parts of a rendering pipeline that engines usually abstract away.</p>
+          <ul class="tags">
+            <li>Vulkan</li><li>C++</li><li>GLSL</li><li>PBR</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener">Repository ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-visual">
+          <!-- VR headset outline -->
+          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
+            <rect x="15" y="35" width="70" height="34" rx="10"/>
+            <circle cx="37" cy="52" r="9"/>
+            <circle cx="63" cy="52" r="9"/>
+            <path d="M15 45 L5 45 L5 60 L15 60"/>
+            <path d="M85 45 L95 45 L95 60 L85 60"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <h3>Immersive VR trainer for lung ultrasound</h3>
+          <p class="project-role">Master's thesis · Unity, C#, HLSL, Meta Quest 3</p>
+          <p class="desc">A VR training simulator that teaches lung ultrasound technique through simulated probe handling and real-time tissue feedback, built for standalone use on Meta Quest 3 with custom HLSL and compute shaders.</p>
+          <ul class="tags">
+            <li>Unity</li><li>C#</li><li>HLSL</li><li>Compute shaders</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener">Write-up ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-visual">
+          <!-- game controller outline -->
+          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
+            <path d="M25 40 Q20 65 30 72 Q40 78 45 62 L55 62 Q60 78 70 72 Q80 65 75 40 Q70 28 50 28 Q30 28 25 40 Z"/>
+            <path d="M35 48 L35 58 M30 53 L40 53"/>
+            <circle cx="65" cy="48" r="2.4"/>
+            <circle cx="70" cy="54" r="2.4"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <h3>From The Dead</h3>
+          <p class="project-role">Team project · Unity, C# · team of 5</p>
+          <p class="desc">A roguelite built with a team of five over a university project cycle, handling procedural encounters and combat systems in Unity. My focus was on core gameplay and rendering-side systems.</p>
+          <ul class="tags">
+            <li>Unity</li><li>C#</li><li>Game design</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener">Repository ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-visual">
+          <!-- robotic arm outline -->
+          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
+            <circle cx="25" cy="75" r="6"/>
+            <path d="M25 69 L45 40 L70 50"/>
+            <circle cx="45" cy="40" r="3.5"/>
+            <circle cx="70" cy="50" r="3.5"/>
+            <path d="M70 50 L82 30"/>
+            <path d="M76 24 L88 24 L88 36 L76 36 Z"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <h3>ROS-based robotics projects</h3>
+          <p class="project-role">University projects · ROS</p>
+          <p class="desc">Two robotics projects built on ROS, covering sensor integration and control logic for autonomous behavior — part of ongoing work bridging real-time software with physical systems.</p>
+          <ul class="tags">
+            <li>ROS</li><li>C++</li><li>Python</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener">Repository ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Skills</h2>
+      </div>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <ul>
+            <li>C++</li>
+            <li>C#</li>
+            <li>Python</li>
+            <li>GLSL / HLSL</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>Graphics &amp; engines</h4>
+          <ul>
+            <li>OpenGL</li>
+            <li>Vulkan</li>
+            <li>Unity</li>
+            <li>Three.js</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>Systems</h4>
+          <ul>
+            <li>Embedded C++</li>
+            <li>ROS</li>
+            <li>Real-time rendering</li>
+            <li>VR/AR (Meta Quest)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <h2>Let's talk</h2>
+      <p>Open to graphics, VR/AR, and real-time systems roles. Reach out if you're working on something in that space.</p>
+      <div class="contact-links">
+        <a href="mailto:your.email@example.com">your.email@example.com</a>
+        <a href="https://github.com/LorenzoAicardi" target="_blank" rel="noopener">github.com/LorenzoAicardi ↗</a>
+        <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">linkedin.com/in/your-linkedin ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Built by Lorenzo Aicardi.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  (function(){
+    var canvas = document.getElementById('hero-canvas');
+    if(!canvas || typeof THREE === 'undefined') return;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.set(0, 0, 4.2);
+
+    function size(){
+      var w = canvas.clientWidth || 360;
+      var h = canvas.clientHeight || 360;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    }
+
+    var geo = new THREE.IcosahedronGeometry(1.5, 1);
+    var wireMat = new THREE.MeshBasicMaterial({ color: 0x14181C, wireframe: true, transparent: true, opacity: 0.85 });
+    var mesh = new THREE.Mesh(geo, wireMat);
+    scene.add(mesh);
+
+    var pointGeo = new THREE.IcosahedronGeometry(1.5, 1);
+    var pointMat = new THREE.PointsMaterial({ color: 0x2F6FED, size: 0.045 });
+    var points = new THREE.Points(pointGeo, pointMat);
+    scene.add(points);
+
+    window.addEventListener('resize', size);
+    size();
+
+    function animate(){
+      if(!reduceMotion){
+        mesh.rotation.x += 0.0022;
+        mesh.rotation.y += 0.0032;
+        points.rotation.x = mesh.rotation.x;
+        points.rotation.y = mesh.rotation.y;
+      }
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+</script>
+
+</body>
+</html>
