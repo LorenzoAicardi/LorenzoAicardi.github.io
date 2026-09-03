@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lorenzo Aicardi — Graphics &amp; Real-Time Systems Engineer</title>
+<title>Lorenzo Aicardi — Graphics &amp; software engineer</title>
 <meta name="description" content="Portfolio of Lorenzo Aicardi — graphics and real-time systems engineer working across rendering, VR/AR, and embedded systems.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -218,7 +218,12 @@
     justify-content: center;
     background: var(--bg-alt);
   }
-  .project-visual svg{ width: 62%; height: 62%; stroke: var(--ink); }
+  .project-visual img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 3px;
+  }
 
   .project-body h3{
     font-family: var(--font-display);
@@ -341,24 +346,13 @@
 </head>
 <body>
 
-<header class="site">
-  <nav class="nav">
-    <a class="name" href="#top">Lorenzo Aicardi</a>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
 <main id="top">
 
   <section class="hero">
     <div class="hero-grid">
       <div>
-        <h1>I build software that renders, tracks, and reacts in real time.</h1>
-        <p class="lede">Graphics and real-time systems engineer working across rendering pipelines, VR/AR, and embedded C++. Based in Milan.</p>
+        <h1>Lorenzo Aicardi</h1>
+        <p class="lede">C++ Software engineer, specialized in computer graphics. Currently based in Milan.</p>
         <div class="hero-links">
           <a class="btn primary" href="#work">See my work</a>
           <a class="btn ghost" href="https://github.com/LorenzoAicardi" target="_blank" rel="noopener">GitHub ↗</a>
@@ -374,27 +368,18 @@
         <h2>About</h2>
       </div>
       <div class="about">
-        <p>I'm a graphics and real-time systems engineer with a background spanning embedded rendering, VR simulation, and game development. I studied <strong>Computer Science and Engineering at Politecnico di Milano</strong>, where my thesis was an immersive VR training simulator built for medical education.</p>
-        <p>Day to day I work in <strong>C++ and OpenGL</strong> writing embedded graphics software, and outside of work I build renderers and real-time tools — most recently a physically based rendering pipeline in Vulkan, and browser-based demos in Three.js.</p>
-        <p>I'm drawn to the layer where geometry, light, and hardware constraints meet — whether that's a shader running on a headset, a rendering pipeline running on custom hardware, or a robot reading its environment through ROS.</p>
+        <p>I am a Software Engineer, currently employed at Pace Aerospace & IT, where I am working on the development of a 2D embedded graphics rendering pipeline for HMI in the aviation industry.</p>
+        <p>I work day to day with <strong>C++, OpenGL</strong> and <strong>GLSL</strong>, while for personal projects I also use <strong>Vulkan, HLSL, C#, Python</strong> and <strong>Unity</strong>. I am currently looking for roles related to C++ software development. You can find a list of projects I have worked on below.</p>
       </div>
 
       <dl class="facts">
         <div>
           <dt>Education</dt>
-          <dd>MSc Computer Science and Engineering, Politecnico di Milano — 107/110</dd>
+          <dd>MSc Computer Science and Engineering, Politecnico di Milano - Grade: 107/110</dd>
         </div>
         <div>
-          <dt>Currently</dt>
-          <dd>Graphics software engineer, embedded systems</dd>
-        </div>
-        <div>
-          <dt>Core stack</dt>
-          <dd>C++, OpenGL, Vulkan, HLSL/GLSL</dd>
-        </div>
-        <div>
-          <dt>Also work with</dt>
-          <dd>Unity, C#, Three.js, ROS</dd>
+          <dt>Professional experience</dt>
+          <dd>Pace Aerospace & IT - C++ Graphics software engineer</dd>
         </div>
       </dl>
     </div>
@@ -403,52 +388,41 @@
   <section id="work">
     <div class="wrap-wide">
       <div class="section-head">
-        <h2>Selected work</h2>
-        <span class="count">04</span>
+        <h2>Projects</h2>
+        <span class="count">05</span>
       </div>
 
       <div class="project">
         <div class="project-visual">
-          <!-- wireframe cube: rendering -->
-          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
-            <path d="M20 30 L50 15 L80 30 L80 65 L50 80 L20 65 Z"/>
-            <path d="M20 30 L50 45 L80 30"/>
-            <path d="M50 45 L50 80"/>
-          </svg>
+          <img src="images/performingscan.png" alt="Screenshot of simulation.">
         </div>
         <div class="project-body">
-          <h3>Real-time PBR renderer</h3>
-          <p class="project-role">Personal project · Vulkan</p>
-          <p class="desc">A physically based rendering pipeline built from scratch in Vulkan, covering deferred shading, image-based lighting, and material workflows. Built to go deeper into the parts of a rendering pipeline that engines usually abstract away.</p>
+          <h3>Immersive Virtual Reality Simulation for Lung Ultrasound Training</h3>
+          <p class="project-role">Master's thesis · Unity, C#, HLSL, Meta Quest 3</p>
+          <p class="desc">A virual reality simulation that teaches lung ultrasound technique through simulated probe handling and realistic ultrasound imaging achieved using shaders, built for standalone use on Meta Quest 3 with Unity, C# and HLSL shaders, and further enhanced with compute shaders. Validated with medicine students.</p>
           <ul class="tags">
-            <li>Vulkan</li><li>C++</li><li>GLSL</li><li>PBR</li>
+            <li>Unity</li><li>C#</li><li>HLSL</li><li>Compute shaders</li>
           </ul>
           <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Repository ↗</a>
+            <a href="https://github.com/LorenzoAicardi/VRLungUltrasoundSimulation" target="_blank" rel="noopener">Repository ↗</a>
           </div>
         </div>
       </div>
 
       <div class="project">
         <div class="project-visual">
-          <!-- VR headset outline -->
-          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
-            <rect x="15" y="35" width="70" height="34" rx="10"/>
-            <circle cx="37" cy="52" r="9"/>
-            <circle cx="63" cy="52" r="9"/>
-            <path d="M15 45 L5 45 L5 60 L15 60"/>
-            <path d="M85 45 L95 45 L95 60 L85 60"/>
-          </svg>
+          <!-- wireframe cube: rendering -->
+          <img src="images/vulkandemo.png" alt="Screenshot of demo.">
         </div>
         <div class="project-body">
-          <h3>Immersive VR trainer for lung ultrasound</h3>
-          <p class="project-role">Master's thesis · Unity, C#, HLSL, Meta Quest 3</p>
-          <p class="desc">A VR training simulator that teaches lung ultrasound technique through simulated probe handling and real-time tissue feedback, built for standalone use on Meta Quest 3 with custom HLSL and compute shaders.</p>
+          <h3>Vulkan rendering demo</h3>
+          <p class="project-role">Personal project · Vulkan</p>
+          <p class="desc">Developed a computer graphics project in a team of 3 people using Vulkan and C++, using advanced rendering techniques such as PBR with Cook-Torrance BRDF. Also implemented a physics engine from scratch, including collisions and gravity.</p>
           <ul class="tags">
-            <li>Unity</li><li>C#</li><li>HLSL</li><li>Compute shaders</li>
+            <li>Vulkan</li><li>C++</li><li>GLSL</li><li>PBR</li>
           </ul>
           <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Write-up ↗</a>
+            <a href="https://github.com/LorenzoAicardi/CG-Project" target="_blank" rel="noopener">Repository ↗</a>
           </div>
         </div>
       </div>
@@ -456,51 +430,54 @@
       <div class="project">
         <div class="project-visual">
           <!-- game controller outline -->
-          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
-            <path d="M25 40 Q20 65 30 72 Q40 78 45 62 L55 62 Q60 78 70 72 Q80 65 75 40 Q70 28 50 28 Q30 28 25 40 Z"/>
-            <path d="M35 48 L35 58 M30 53 L40 53"/>
-            <circle cx="65" cy="48" r="2.4"/>
-            <circle cx="70" cy="54" r="2.4"/>
-          </svg>
+          <img src="images/fromthedead.jpg" alt="Screenshot of game.">
         </div>
         <div class="project-body">
           <h3>From The Dead</h3>
-          <p class="project-role">Team project · Unity, C# · team of 5</p>
-          <p class="desc">A roguelite built with a team of five over a university project cycle, handling procedural encounters and combat systems in Unity. My focus was on core gameplay and rendering-side systems.</p>
+          <p class="project-role">Team project · Unity, C#</p>
+          <p class="desc">A roguelite built with a team of five people, developed in Unity and C#. My focus was on developing the combat systems and UI elements.</p>
           <ul class="tags">
             <li>Unity</li><li>C#</li><li>Game design</li>
           </ul>
           <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Repository ↗</a>
+            <a href="https://polimi-game-collective.itch.io/from-the-dead" target="_blank" rel="noopener">itch.io ↗</a>
           </div>
         </div>
       </div>
 
       <div class="project">
         <div class="project-visual">
-          <!-- robotic arm outline -->
-          <svg viewBox="0 0 100 100" fill="none" stroke-width="1.4">
-            <circle cx="25" cy="75" r="6"/>
-            <path d="M25 69 L45 40 L70 50"/>
-            <circle cx="45" cy="40" r="3.5"/>
-            <circle cx="70" cy="50" r="3.5"/>
-            <path d="M70 50 L82 30"/>
-            <path d="M76 24 L88 24 L88 36 L76 36 Z"/>
-          </svg>
+          <img src="images/bouncepoints.png" alt="Graph of bounce points.">
         </div>
         <div class="project-body">
-          <h3>ROS-based robotics projects</h3>
-          <p class="project-role">University projects · ROS</p>
-          <p class="desc">Two robotics projects built on ROS, covering sensor integration and control logic for autonomous behavior — part of ongoing work bridging real-time software with physical systems.</p>
+          <h3>Detector of ball bounces</h3>
+          <p class="project-role">University project · Python</p>
+          <p class="desc">Project developed for the Image Analysis and Computer Vision course; consists in developing a pipeline that takes as input a video of an official tennis match, and outputs the 3D coordinates of the places where the ball bounces.</p>
           <ul class="tags">
-            <li>ROS</li><li>C++</li><li>Python</li>
+            <li>Python</li><li>OpenCV</li>
           </ul>
           <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Repository ↗</a>
+            <a href="https://github.com/LorenzoAicardi/TennisBounceDetector" target="_blank" rel="noopener">Repository ↗</a>
           </div>
         </div>
       </div>
 
+      <div class="project">
+        <div class="project-visual">
+          <img src="images/trajectory.png" alt="Image of estimated trajectory.">
+        </div>
+        <div class="project-body">
+          <h3>Robotics projects</h3>
+          <p class="project-role">University projects · ROS</p>
+          <p class="desc">Developed two robotics pipelines using ROS in a Linux environment: one estimating mecanum-wheel robot odometry from encoder data via custom forward/inverse kinematics, the other performing SLAM and Monte Carlo localization from laser scan and odometry data.</p>
+          <ul class="tags">
+            <li>ROS</li><li>C++</li><li>Python</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/LacavaMarco/Robotics-project-2022" target="_blank" rel="noopener">Repository ↗</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -516,7 +493,8 @@
             <li>C++</li>
             <li>C#</li>
             <li>Python</li>
-            <li>GLSL / HLSL</li>
+            <li>GLSL/HLSL</li>
+            <li>Java</li>
           </ul>
         </div>
         <div class="skill-group">
@@ -525,16 +503,19 @@
             <li>OpenGL</li>
             <li>Vulkan</li>
             <li>Unity</li>
-            <li>Three.js</li>
+            <li>RenderDoc</li>
           </ul>
         </div>
         <div class="skill-group">
-          <h4>Systems</h4>
+          <h4>Tools</h4>
           <ul>
-            <li>Embedded C++</li>
-            <li>ROS</li>
-            <li>Real-time rendering</li>
-            <li>VR/AR (Meta Quest)</li>
+            <li>Jenkins</li>
+            <li>Jira</li>
+            <li>Git/GitHub</li>
+            <li>UML</li>
+            <li>CMake</li>
+            <li>Make</li>
+            <li>Visual Studio</li>
           </ul>
         </div>
       </div>
@@ -543,23 +524,16 @@
 
   <section id="contact">
     <div class="wrap contact">
-      <h2>Let's talk</h2>
-      <p>Open to graphics, VR/AR, and real-time systems roles. Reach out if you're working on something in that space.</p>
+      <h2>Contacts</h2>
       <div class="contact-links">
-        <a href="mailto:your.email@example.com">your.email@example.com</a>
+        <a href="mailto:your.email@example.com">lorenzo.aicardi@gmail.com</a>
         <a href="https://github.com/LorenzoAicardi" target="_blank" rel="noopener">github.com/LorenzoAicardi ↗</a>
-        <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">linkedin.com/in/your-linkedin ↗</a>
+        <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">https://www.linkedin.com/in/lorenzo-aicardi-2711a81a2/ ↗</a>
       </div>
     </div>
   </section>
 
 </main>
-
-<footer>
-  <div class="wrap">
-    <p>Built by Lorenzo Aicardi.</p>
-  </div>
-</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
